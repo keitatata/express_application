@@ -3,14 +3,25 @@ var router = express.Router();
  
 /* GET helo page. */
 router.get('/', function(req, res, next) {
-    res.render('helo', {
-        title: 'Helo',
-        data: {
-            '太郎':'taro@yamada',
-            '花子':'hanako@flower',
-            'つやの':'syoda@tuyano.com'
+    var p1 = req.query["p1"];
+    var p2 = req.query.p2;
+    var msg = p1 == undefined ? "" : p1 + "," + p2;
+    res.render('helo', 
+        {
+            title: 'HELO Page',
+            msg: msg,
+            input: ''
         }
-    });
+    );
+});
+ 
+/* POST helo page. */
+router.post('/', function(req, res, next) {
+    // console.log(req.query);
+    var str = req.query.input1;
+    res.json(
+        { msg: str }
+    );
 });
  
 module.exports = router;
